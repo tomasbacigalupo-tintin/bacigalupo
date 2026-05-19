@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Acta de Inspección — INSP-2026-0331</title>
+<link rel="stylesheet" href="docs.css" />
+<style>
+  /* The acta is denser — works as a compact 2-page field record */
+  .acta-head {
+    border: 1px solid var(--neutral-900);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 0 6mm;
+  }
+  .acta-head .top {
+    display: grid; grid-template-columns: 1fr auto;
+    background: var(--neutral-900); color: #fff;
+    padding: 4mm 6mm;
+    align-items: center;
+  }
+  .acta-head .top h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 16pt; letter-spacing: 0.04em;
+    margin: 0; text-transform: uppercase;
+  }
+  .acta-head .top h1 small {
+    display: block; font-size: 9pt; font-weight: 600;
+    color: var(--primary-300); letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+  .acta-head .top .ref { font-family: var(--font-mono); font-size: 10pt; font-weight: 700; text-align: right; line-height: 1.4; }
+  .acta-head .top .ref small { display: block; font-family: var(--font-body); font-size: 8.5pt; font-weight: 500; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; }
+  .acta-head .body { padding: 4mm 6mm; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm 8mm; }
+  .acta-head .body .f .k { font-family: var(--font-display); font-size: 7.5pt; letter-spacing: 0.10em; text-transform: uppercase; color: var(--neutral-600); font-weight: 700; }
+  .acta-head .body .f .v { font-size: 10pt; color: var(--neutral-900); font-weight: 600; padding-top: 2px; }
+  .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 8mm; margin: 4mm 0; }
+  .check-list .item { display: grid; grid-template-columns: 18mm 1fr auto; align-items: center; padding: 2mm 0; border-bottom: 1px dashed var(--neutral-200); font-size: 9.5pt; }
+  .check-list .item .lbl { font-family: var(--font-display); font-weight: 700; font-size: 8pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--neutral-600); }
+  .check-list .item .val { color: var(--neutral-900); }
+  .check-list .item .state { display: inline-flex; gap: 8px; font-family: var(--font-display); font-size: 8pt; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .check-list .item .state b { display: inline-block; width: 11px; height: 11px; border-radius: 2px; }
+  .ok b { background: var(--success-500); } .ok { color: var(--success-700); }
+  .obs b { background: var(--warning-500); } .obs { color: var(--warning-700); }
+  .ko b { background: var(--danger-500); } .ko { color: var(--danger-700); }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <span class="label">Vista previa</span>
+  <button onclick="window.print()">Imprimir / Guardar PDF</button>
+</div>
+
+<div class="doc">
+
+<!-- PAGE 1 — DATOS + CHECKLIST -->
+<article class="page">
+
+  <header class="page-header">
+    <div class="mark">
+      <img src="../assets/logo-primary.png" alt="" />
+      <div class="firm">Estudio Bacigalupo &amp; Asociados<small>Inspecciones técnicas</small></div>
+    </div>
+    <div class="doc-ref">
+      <strong>Acta INSP-2026-0331</strong>
+      Operativo de campo · Equipo de Inspectores Córdoba
+    </div>
+  </header>
+
+  <main>
+
+    <div class="acta-head">
+      <div class="top">
+        <h1><small>Acta de inspección técnica</small>Granizo · Flota mediana</h1>
+        <div class="ref">INSP-2026-0331<small>02/05/2026 · 09:14 hs</small></div>
+      </div>
+      <div class="body">
+        <div class="f"><div class="k">Inspector designado</div><div class="v">Ing. L. Sosa — Mat. CPI 0421</div></div>
+        <div class="f"><div class="k">Aseguradora</div><div class="v">Aseguradora del Norte S.A.</div></div>
+        <div class="f"><div class="k">Asegurado</div><div class="v">Logística del Centro S.R.L.</div></div>
+        <div class="f"><div class="k">Siniestro Nº</div><div class="v">28415/2026</div></div>
+        <div class="f"><div class="k">Póliza Nº</div><div class="v">AUT-1102-00481</div></div>
+        <div class="f"><div class="k">Ubicación</div><div class="v">Ruta E-53 km 12, Río Ceballos, Córdoba</div></div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section"><span class="num">01</span><h2>Objeto de la inspección</h2></div>
+      <p>Relevamiento técnico de la totalidad de las unidades de la flota declarada presentes en el predio playa al momento de la inspección, con el objeto de constatar la existencia, naturaleza y magnitud de los daños denunciados como consecuencia de la tormenta convectiva con granizo del <strong>28 de abril de 2026</strong>.</p>
+    </section>
+
+    <section>
+      <div class="section"><span class="num">02</span><h2>Verificación preliminar del predio</h2></div>
+      <div class="check-list">
+        <div class="item"><span class="lbl">Acceso</span><span class="val">Predio cerrado, perímetro alambrado completo.</span><span class="state ok"><b></b>Verificado</span></div>
+        <div class="item"><span class="lbl">Iluminación</span><span class="val">Tres columnas de 250W en perímetro, todas operativas.</span><span class="state ok"><b></b>Verificado</span></div>
+        <div class="item"><span class="lbl">Cobertura playa</span><span class="val">Sin techado parcial — exposición plena.</span><span class="state obs"><b></b>Observado</span></div>
+        <div class="item"><span class="lbl">Drenaje pluvial</span><span class="val">Pendiente correcta hacia desagüe oeste.</span><span class="state ok"><b></b>Verificado</span></div>
+        <div class="item"><span class="lbl">Cámaras de seguridad</span><span class="val">Cuatro cámaras IP — DVR con 18 días de retención.</span><span class="state ok"><b></b>Verificado</span></div>
+        <div class="item"><span class="lbl">Registro de ingresos</span><span class="val">Sin terceros ingresados en franja 26-28 de abril.</span><span class="state ok"><b></b>Verificado</span></div>
+        <div class="item"><span class="lbl">Restos vegetales</span><span class="val">Hojas y ramas finas en cubierta de las unidades 03 y 07.</span><span class="state obs"><b></b>Observado</span></div>
+        <div class="item"><span class="lbl">Granizo remanente</span><span class="val">No se observan restos al momento de la inspección.</span><span class="state ko"><b></b>No constatable</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section"><span class="num">03</span><h2>Resumen de la flota inspeccionada</h2></div>
+      <table class="report">
+        <thead>
+          <tr>
+            <th style="width:28px">#</th>
+            <th>Unidad / dominio</th>
+            <th>Modelo</th>
+            <th>Áreas afectadas</th>
+            <th class="num" style="width:18%">Estimación</th>
+            <th style="width:18%">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="idx">01</td><td>AB-241-OP</td><td>Iveco Daily 70C17</td><td>Techo cabina, capot, parabrisas</td><td class="num money">USD 4.200</td><td><span class="chip chip-pending">A reparar</span></td></tr>
+          <tr><td class="idx">02</td><td>AB-241-OQ</td><td>Iveco Daily 70C17</td><td>Techo cabina, paneles superiores</td><td class="num money">USD 3.800</td><td><span class="chip chip-pending">A reparar</span></td></tr>
+          <tr><td class="idx">03</td><td>AB-241-OR</td><td>Iveco Daily 70C17</td><td>Daño extenso · panel superior</td><td class="num money">USD 6.200</td><td><span class="chip chip-review">Evaluar PT</span></td></tr>
+          <tr><td class="idx">07</td><td>AC-188-MZ</td><td>Mercedes-Benz Sprinter 515</td><td>Techo, capot, óptica delantera der.</td><td class="num money">USD 5.700</td><td><span class="chip chip-pending">A reparar</span></td></tr>
+          <tr><td class="idx">14</td><td>AC-712-LK</td><td>Ford F-4000</td><td>Sin daño relevante constatado</td><td class="num money">—</td><td><span class="chip chip-neutral">Sin daño</span></td></tr>
+          <tr><td class="idx">17</td><td>AD-022-VG</td><td>Renault Master L3H2</td><td>Parabrisas + óptica izq.</td><td class="num money">USD 1.400</td><td><span class="chip chip-pending">A reparar</span></td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="5">Estimación provisoria total (6 unidades de 17 relevadas)</td><td class="num money">USD 21.300</td></tr>
+        </tfoot>
+      </table>
+      <p style="font-size:9pt;color:var(--neutral-600)"><em>El presente cuadro sintetiza únicamente las unidades cuyo relevamiento se consigna en esta acta. El detalle de las once unidades restantes obra en el anexo fotográfico adjunto y se incorporará al informe definitivo.</em></p>
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    <span class="confid">Confidencial · Documento de trabajo</span>
+    <span class="contact">inspecciones@bacigalupo.example.com.ar</span>
+    <span class="pageno">Pág. 1 / 2</span>
+  </footer>
+</article>
+
+<!-- PAGE 2 — EVIDENCIA + OBSERVACIONES + FIRMA -->
+<article class="page">
+
+  <header class="page-header">
+    <div class="mark">
+      <img src="../assets/logo-primary.png" alt="" />
+      <div class="firm">Estudio Bacigalupo &amp; Asociados<small>Inspecciones técnicas</small></div>
+    </div>
+    <div class="doc-ref">
+      <strong>Acta INSP-2026-0331</strong>
+      Operativo de campo · Equipo de Inspectores Córdoba
+    </div>
+  </header>
+
+  <main>
+
+    <section>
+      <div class="section"><span class="num">04</span><h2>Evidencia fotográfica</h2></div>
+      <div class="evidence cols-3">
+        <figure>
+          <div class="frame"><span class="pid">U01-01</span><span class="ph-label">Techo cabina · Unidad 01</span></div>
+          <figcaption>
+            <span class="desc">Múltiples impactos circulares de 18–28 mm en cubierta de cabina.</span>
+            <span class="meta">02/05 · 09:22</span>
+            <span class="meta right">−31.16° / −64.32°</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><span class="pid">U01-02</span><span class="ph-label">Capot · Unidad 01</span></div>
+          <figcaption>
+            <span class="desc">Deformaciones puntuales sin perforación de chapa.</span>
+            <span class="meta">02/05 · 09:24</span>
+            <span class="meta right">EXIF OK</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><span class="pid">U03-01</span><span class="ph-label">Panel superior · Unidad 03</span></div>
+          <figcaption>
+            <span class="desc">Daño extenso · evaluar pérdida total parcial del panel.</span>
+            <span class="meta">02/05 · 09:48</span>
+            <span class="meta right">EXIF OK</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><span class="pid">U07-01</span><span class="ph-label">Óptica der. · Unidad 07</span></div>
+          <figcaption>
+            <span class="desc">Rotura de tulipa óptica. Cuerpo de farol sin compromiso.</span>
+            <span class="meta">02/05 · 10:04</span>
+            <span class="meta right">EXIF OK</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><span class="pid">U17-01</span><span class="ph-label">Parabrisas · Unidad 17</span></div>
+          <figcaption>
+            <span class="desc">Fisura radial desde sector medio inferior. Reemplazo total.</span>
+            <span class="meta">02/05 · 10:21</span>
+            <span class="meta right">EXIF OK</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="frame"><span class="pid">PRD-01</span><span class="ph-label">Predio · vista general</span></div>
+          <figcaption>
+            <span class="desc">Distribución de las unidades en la playa al momento del relevamiento.</span>
+            <span class="meta">02/05 · 09:14</span>
+            <span class="meta right">−31.16° / −64.32°</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <div class="section"><span class="num">05</span><h2>Observaciones técnicas</h2></div>
+      <div class="callout">
+        <div class="label">Nexo causal del fenómeno</div>
+        <p>El patrón de daños relevado es <strong>compatible con caída de granizo</strong> de diámetro estimado entre 18 y 35 mm, distribuido sobre superficies horizontales o de baja pendiente. El registro del Servicio Meteorológico Nacional para la estación Córdoba Observatorio confirma evento de severidad alta para la ventana horaria denunciada.</p>
+      </div>
+      <div class="callout warning">
+        <div class="label">Inconsistencia menor</div>
+        <p>La unidad 03 presenta una <strong>banda de oxidación previa</strong> en el sector lateral izquierdo del panel superior, ajena al evento denunciado. Se recomienda al taller liquidador segregar el costo de reparación correspondiente exclusivamente al daño por granizo.</p>
+      </div>
+      <div class="callout legal">
+        <div class="label">Documentación verificada in situ</div>
+        <p>Cédulas verdes, RUTA, habilitación CNRT y póliza vigente para las dieciséis (16) unidades inspeccionadas. La unidad 14 se inspecciona como precaución; no presenta daño y se incluye en la presente acta a los fines de completitud del operativo.</p>
+      </div>
+    </section>
+
+    <div class="signoff" style="margin-top: 8mm">
+      <div>
+        <div style="font-family: var(--font-display); font-weight: 700; font-size: 8pt; letter-spacing: 0.10em; text-transform: uppercase; color: var(--neutral-600);">Conformidad del asegurado</div>
+        <div style="margin-top: 12mm; border-top: 1px solid var(--neutral-700); padding-top: 4px; min-width: 56mm; font-size: 9pt; color: var(--neutral-600);">Firma y aclaración · Sr. F. Romero<br/>Apoderado · Logística del Centro S.R.L.</div>
+      </div>
+      <div class="sign">
+        <img src="../assets/signature-nbacigalupo.png" alt="Firma" />
+        <div class="name">Ing. L. Sosa</div>
+        <div class="role">Inspector designado · Mat. CPI 0421</div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="page-footer">
+    <span class="confid">Confidencial · Documento de trabajo</span>
+    <span class="contact">inspecciones@bacigalupo.example.com.ar</span>
+    <span class="pageno">Pág. 2 / 2</span>
+  </footer>
+</article>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Reporte ejecutivo de cartera — Marzo 2026</title>
+<link rel="stylesheet" href="docs.css" />
+<style>
+  /* Single-page exec report uses slightly tighter margins */
+  .page.exec { padding: 18mm 18mm; }
+  .exec-head { display:flex; align-items:flex-start; justify-content:space-between; gap: 16mm; padding-bottom: 6mm; border-bottom: 2px solid var(--primary-500); margin-bottom: 6mm; }
+  .exec-head .title h1 { font-family: var(--font-display); font-weight:700; font-size: 26pt; margin: 0 0 4mm; letter-spacing: -0.01em; line-height: 1.1; color: var(--neutral-900); }
+  .exec-head .title .k { font-family: var(--font-display); font-weight: 700; font-size: 9pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--primary-600); margin-bottom: 6mm; }
+  .exec-head .title .lede { font-size: 10pt; color: var(--neutral-700); max-width: 60ch; }
+  .exec-head .meta-card { min-width: 56mm; border: 1px solid var(--neutral-200); border-radius: 4px; padding: 4mm 5mm; font-family: var(--font-mono); font-size: 8.5pt; line-height: 1.6; color: var(--neutral-700); }
+  .exec-head .meta-card strong { display: block; font-family: var(--font-display); font-size: 9pt; letter-spacing: 0.06em; color: var(--neutral-900); }
+  .row-2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 8mm; margin-bottom: 6mm; }
+  .row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; margin-bottom: 6mm; }
+  .panel { border: 1px solid var(--neutral-200); border-radius: 4px; padding: 5mm 6mm; background: #fff; }
+  .panel h3 { font-family: var(--font-display); font-weight: 700; font-size: 9pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--neutral-600); margin: 0 0 4mm; }
+  .panel p { font-size: 9.5pt; }
+  /* Bar chart */
+  .bar-chart { display:flex; flex-direction: column; gap: 8px; }
+  .bar-row { display: grid; grid-template-columns: 60mm 1fr 28mm; gap: 6mm; align-items: center; font-size: 9.5pt; }
+  .bar-row .bar { height: 14px; background: var(--neutral-100); border-radius: 2px; position: relative; overflow: hidden; }
+  .bar-row .bar span { display: block; height: 100%; background: var(--primary-500); }
+  .bar-row .bar.alt span { background: var(--neutral-700); }
+  .bar-row .val { text-align: right; font-family: var(--font-body); font-variant-numeric: tabular-nums; color: var(--neutral-900); font-weight: 600; }
+  /* Donut chart (CSS conic) */
+  .donut { width: 36mm; height: 36mm; border-radius: 999px; background: conic-gradient(var(--success-500) 0 62%, var(--warning-500) 62% 78%, var(--primary-500) 78% 92%, var(--danger-500) 92% 100%); position: relative; margin: 0 auto; }
+  .donut::after { content: ""; position: absolute; inset: 22%; background: #fff; border-radius: 999px; }
+  .donut + .legend { display:flex; flex-direction:column; gap: 4px; padding-top: 4mm; font-size: 9pt; }
+  .donut + .legend span { display: inline-flex; align-items:center; gap: 6px; }
+  .donut + .legend span::before { content:""; width: 9px; height: 9px; border-radius: 2px; background: currentColor; }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <span class="label">Vista previa</span>
+  <button onclick="window.print()">Imprimir / Guardar PDF</button>
+</div>
+
+<div class="doc">
+
+<article class="page exec">
+
+  <header class="exec-head">
+    <div class="title">
+      <div class="k">Reporte ejecutivo · Cartera asignada · Marzo 2026</div>
+      <h1>Compañía Mediterránea de Seguros S.A.</h1>
+      <p class="lede">Síntesis de gestión correspondiente a los expedientes de la sección Automotores y Riesgos Patrimoniales asignados al Estudio durante el mes en curso. Indicadores operativos, evolución de reservas y casos relevantes para revisión gerencial.</p>
+    </div>
+    <div class="meta-card">
+      <strong>Reporte Nº 03/26</strong>
+      Período: 01 — 31 de marzo de 2026<br/>
+      Emitido: 12 de mayo de 2026<br/>
+      Dirigido: Gerencia de Siniestros<br/>
+      Ref.: contrato marco 18/2024
+    </div>
+  </header>
+
+  <!-- KPI strip -->
+  <div class="exec-grid" style="margin-bottom: 6mm">
+    <div class="exec-kpi accent" style="grid-column: span 3">
+      <span class="label">Expedientes en gestión</span>
+      <span class="value">147</span>
+      <span class="delta">▲ 12 vs. febrero · 89% activos</span>
+    </div>
+    <div class="exec-kpi" style="grid-column: span 3">
+      <span class="label">Cierres en el período</span>
+      <span class="value">62</span>
+      <span class="delta">Tiempo medio · 21 días</span>
+    </div>
+    <div class="exec-kpi" style="grid-column: span 3">
+      <span class="label">Reserva técnica total</span>
+      <span class="value money">USD 2,84M</span>
+      <span class="delta">▼ 8% vs. previsión inicial</span>
+    </div>
+    <div class="exec-kpi" style="grid-column: span 3">
+      <span class="label">SLA inspección urgente</span>
+      <span class="value">96%</span>
+      <span class="delta">Objetivo: 95% · 48 hs</span>
+    </div>
+  </div>
+
+  <!-- 2-col -->
+  <div class="row-2">
+    <div class="panel">
+      <h3>Volumen y composición · marzo 2026</h3>
+      <div class="bar-chart">
+        <div class="bar-row"><span>Automotores — RC</span><span class="bar"><span style="width:78%"></span></span><span class="val">58</span></div>
+        <div class="bar-row"><span>Automotores — Casco</span><span class="bar"><span style="width:54%"></span></span><span class="val">41</span></div>
+        <div class="bar-row"><span>Patrimonial — Granizo</span><span class="bar"><span style="width:31%"></span></span><span class="val">23</span></div>
+        <div class="bar-row"><span>Patrimonial — Incendio</span><span class="bar"><span style="width:14%"></span></span><span class="val">11</span></div>
+        <div class="bar-row"><span>Robo y hurto</span><span class="bar"><span style="width:10%"></span></span><span class="val">8</span></div>
+        <div class="bar-row"><span>Otros / mixtos</span><span class="bar alt"><span style="width:8%"></span></span><span class="val">6</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Estado de los expedientes</h3>
+      <div class="donut"></div>
+      <div class="legend">
+        <span style="color:var(--success-500)">Cerrados en término · 62%</span>
+        <span style="color:var(--warning-500)">En instrucción · 16%</span>
+        <span style="color:var(--primary-500)">A dictamen · 14%</span>
+        <span style="color:var(--danger-500)">Con observaciones · 8%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-col panels -->
+  <div class="row-3">
+    <div class="panel">
+      <h3>Casos relevantes</h3>
+      <div class="tl" style="margin: -2mm 0;">
+        <div class="step"><div class="when">EXP 27914</div><div class="what"><strong>Colisión múltiple RN-9</strong>Reserva USD 46.200 · dictamen elevado.</div></div>
+        <div class="step"><div class="when">EXP 28415</div><div class="what"><strong>Granizo · flota Logística</strong>Provisorio · 17 unidades.</div></div>
+        <div class="step"><div class="when">EXP 28102</div><div class="what"><strong>Incendio depósito</strong>Pericial conjunta SSN · sin definir cobertura.</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Alertas operativas</h3>
+      <div style="display:flex;flex-direction:column;gap:4mm">
+        <div class="callout warning" style="margin:0;padding: 3mm 4mm">
+          <div class="label">Plazo crítico</div>
+          <p style="font-size:9pt">EXP 27602 — 3 días para cierre de instrucción judicial.</p>
+        </div>
+        <div class="callout danger" style="margin:0;padding: 3mm 4mm">
+          <div class="label">Riesgo de exclusión</div>
+          <p style="font-size:9pt">EXP 27488 — Discordancia en declaración de uso del bien.</p>
+        </div>
+        <div class="callout legal" style="margin:0;padding: 3mm 4mm">
+          <div class="label">Acción pendiente</div>
+          <p style="font-size:9pt">EXP 27911 — Aguarda autorización de pago a tercero.</p>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Indicadores de proceso</h3>
+      <table class="fields" style="margin: 0;">
+        <tr><td>SLA denuncia → inspección</td><td><span class="risk-bar low"><span class="bars"><b></b><b></b><b></b></span>Bajo</span></td></tr>
+        <tr><td>SLA inspección → dictamen</td><td><span class="risk-bar medium"><span class="bars"><b></b><b></b><b></b></span>Medio</span></td></tr>
+        <tr><td>Backlog histórico</td><td><span class="risk-bar low"><span class="bars"><b></b><b></b><b></b></span>Bajo</span></td></tr>
+        <tr><td>Pendiente toxicológicos</td><td><span class="chip chip-pending">7 casos</span></td></tr>
+        <tr><td>Pericias en curso</td><td><span class="chip chip-review">14 casos</span></td></tr>
+        <tr><td>Reapertura de expedientes</td><td><span class="chip chip-neutral">2 casos</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout conclusion" style="margin-bottom: 4mm">
+    <div class="label">Recomendaciones del Estudio</div>
+    <p>Mantener el ritmo de cierres del período, priorizando los expedientes con plazo crítico identificados en este reporte. Se sugiere convocar a una mesa de trabajo conjunta para revisar la posición de la aseguradora en los siniestros patrimoniales con concurrencia de causalidades, donde se observa una tendencia al alza en el último trimestre. Próximo reporte de cartera: <strong>15 de junio de 2026</strong>.</p>
+  </div>
+
+  <div class="signoff" style="margin-top: 4mm;padding-top:4mm;border-top:1px solid var(--neutral-200)">
+    <div class="place">Córdoba, 12 de mayo de 2026 — <em>Para uso interno de la aseguradora destinataria.</em></div>
+    <div class="sign">
+      <img src="../assets/signature-nbacigalupo.png" alt="Firma" />
+      <div class="name">Nicolás A. Bacigalupo</div>
+      <div class="role">Mat. Nº 284-SSN</div>
+    </div>
+  </div>
+
+</article>
+
+</div>
+</body>
+</html>
