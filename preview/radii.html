@@ -1,0 +1,17 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Radii</title><link rel="stylesheet" href="_card.css">
+<style>
+  .grid { display:grid; grid-template-columns: repeat(5, 1fr); gap:14px; }
+  .tile { background:var(--neutral-100); border:1px solid var(--border-subtle); aspect-ratio:1/1; display:flex; align-items:flex-end; justify-content:center; padding:8px; }
+  .meta { display:flex; flex-direction:column; align-items:center; gap:2px; }
+  .name { font-family: var(--font-display); font-weight:700; font-size:11px; color:var(--fg-1); }
+  .px { font-family: var(--font-mono); font-size:10px; color:var(--fg-2); }
+</style></head>
+<body><div class="card" style="padding:20px 24px;">
+  <div class="grid">
+    <div class="tile" style="border-radius:2px;"><div class="meta"><span class="name">xs</span><span class="px">2px</span></div></div>
+    <div class="tile" style="border-radius:4px;"><div class="meta"><span class="name">sm</span><span class="px">4px</span></div></div>
+    <div class="tile" style="border-radius:8px;"><div class="meta"><span class="name">md</span><span class="px">8px</span></div></div>
+    <div class="tile" style="border-radius:12px;"><div class="meta"><span class="name">lg</span><span class="px">12px</span></div></div>
+    <div class="tile" style="border-radius:999px;"><div class="meta"><span class="name">full</span><span class="px">999</span></div></div>
+  </div>
+</div></body></html>

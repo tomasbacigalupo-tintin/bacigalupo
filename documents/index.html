@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Sistema documental — Estudio Bacigalupo</title>
+<link rel="stylesheet" href="../colors_and_type.css" />
+<style>
+  body { background: var(--neutral-50); margin: 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .topbar { background: #fff; border-bottom: 1px solid var(--border-subtle); }
+  .topbar .row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .topbar img { height: 38px; }
+  .topbar .meta { font-family: var(--font-mono); font-size: 12px; color: var(--neutral-500); }
+
+  .hero { padding: 72px 0 48px; }
+  .hero .kicker { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary-600); margin-bottom: 14px; }
+  .hero h1 { font-size: 44px; line-height: 1.08; letter-spacing: -0.015em; max-width: 22ch; margin: 0 0 18px; }
+  .hero p { font-size: 18px; color: var(--fg-2); max-width: 60ch; }
+  .hero .toolbar { display: flex; gap: 24px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-subtle); font-family: var(--font-display); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--neutral-600); }
+  .hero .toolbar strong { color: var(--neutral-900); display: block; font-size: 16px; letter-spacing: -0.005em; text-transform: none; font-weight: 700; margin-top: 4px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding-bottom: 72px;
+  }
+  .doc-card {
+    background: #fff;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid var(--border-subtle); /* override default a */
+    transition: border-color 150ms var(--ease-out), transform 250ms var(--ease-out);
+  }
+  .doc-card:hover {
+    border-color: var(--primary-300);
+    color: inherit;
+  }
+  .doc-card .thumb {
+    aspect-ratio: 1 / 1.41;    /* A4 portrait preview */
+    background: var(--neutral-100);
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+    overflow: hidden;
+    display: block;
+  }
+  .doc-card .thumb iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 250%;
+    height: 250%;
+    border: 0;
+    transform: scale(0.4);
+    transform-origin: top left;
+    pointer-events: none;
+    background: #fff;
+  }
+  .doc-card .meta { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .doc-card .kicker { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary-600); }
+  .doc-card h3 { font-size: 20px; line-height: 1.2; margin: 0; }
+  .doc-card p { font-size: 14px; color: var(--fg-2); margin: 0; }
+  .doc-card .pages { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 11px; color: var(--neutral-500); }
+  .doc-card .pages span { padding: 3px 8px; background: var(--neutral-100); border-radius: 3px; }
+
+  /* component-gallery row at the bottom */
+  .components { padding: 48px 0 80px; background: #fff; border-top: 1px solid var(--border-subtle); }
+  .components h2 { font-size: 28px; margin: 0 0 8px; }
+  .components > .container > p { color: var(--fg-2); max-width: 60ch; margin: 0 0 32px; }
+  .comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .comp-grid .item { padding: 16px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: #fff; display: flex; flex-direction: column; gap: 10px; }
+  .comp-grid .item h4 { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--neutral-700); margin: 0; }
+  .comp-grid .item .preview { display: flex; align-items: center; justify-content: center; padding: 12px; background: var(--neutral-50); border-radius: var(--radius-sm); }
+
+  /* Mini component previews share these styles */
+  :root { --doc-fs: 11px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 3px; font-family: var(--font-display); font-weight: 700; font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase; }
+  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
+  .chip-covered  { background: var(--success-50); color: var(--success-700); }
+  .chip-excluded { background: var(--danger-50);  color: var(--danger-700); }
+  .chip-pending  { background: var(--warning-50); color: var(--warning-700); }
+  .chip-review   { background: var(--primary-50); color: var(--primary-700); }
+  .chip-neutral  { background: var(--neutral-100); color: var(--neutral-700); }
+
+  .risk-bar { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .risk-bar .bars { display: flex; gap: 2px; }
+  .risk-bar .bars b { display: block; width: 8px; height: 14px; background: var(--neutral-200); border-radius: 1px; }
+  .risk-bar.low    .bars b:nth-child(-n+1),
+  .risk-bar.medium .bars b:nth-child(-n+2),
+  .risk-bar.high   .bars b:nth-child(-n+3) { background: currentColor; }
+  .risk-bar.low { color: var(--success-700); } .risk-bar.medium { color: var(--warning-700); } .risk-bar.high { color: var(--danger-700); }
+
+  .demo-callout { padding: 10px 14px; border-left: 3px solid var(--primary-500); background: var(--neutral-50); border-radius: 0 4px 4px 0; font-size: 12px; line-height: 1.4; width: 100%; }
+  .demo-callout .label { font-family: var(--font-display); font-weight: 700; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary-700); margin-bottom: 4px; }
+
+  .demo-table { width: 100%; border-collapse: collapse; font-size: 11px; font-variant-numeric: tabular-nums; }
+  .demo-table th { background: var(--neutral-900); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase; padding: 6px 8px; text-align: left; }
+  .demo-table td { padding: 6px 8px; border-bottom: 1px solid var(--neutral-200); }
+
+  .demo-meta { font-size: 11px; }
+  .demo-meta .row { display: grid; grid-template-columns: 38% 62%; border-top: 1px solid var(--neutral-200); }
+  .demo-meta .row:first-child { border-top: 0; }
+  .demo-meta .row .k { background: var(--neutral-50); padding: 4px 8px; font-family: var(--font-display); font-size: 8px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--neutral-600); font-weight: 700; border-right: 1px solid var(--neutral-200); }
+  .demo-meta .row .v { padding: 4px 8px; color: var(--neutral-900); font-weight: 500; }
+
+  .demo-evidence { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; width: 100%; }
+  .demo-evidence figure { margin: 0; border: 1px solid var(--neutral-200); border-radius: 3px; overflow: hidden; }
+  .demo-evidence .frame { aspect-ratio: 4/3; background: var(--neutral-100); background-image: repeating-linear-gradient(45deg, transparent 0 14px, rgba(155,167,179,0.06) 14px 28px); position: relative; }
+  .demo-evidence .pid { position: absolute; top: 4px; left: 4px; background: rgba(15,23,42,0.86); color: #fff; font-family: var(--font-mono); font-size: 8px; font-weight: 600; padding: 1px 5px; border-radius: 2px; }
+  .demo-evidence figcaption { padding: 5px 7px; font-size: 9px; color: var(--neutral-600); font-family: var(--font-mono); border-top: 1px solid var(--neutral-200); }
+
+  .demo-banner { display: flex; gap: 10px; padding: 8px 12px; border: 1px solid var(--primary-200); background: var(--primary-50); border-radius: 4px; font-size: 11px; color: var(--primary-800); width: 100%; }
+  .demo-banner strong { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; font-size: 9px; color: var(--primary-700); }
+
+  .demo-section { display: flex; align-items: baseline; gap: 8px; width: 100%; }
+  .demo-section .num { font-family: var(--font-display); font-weight: 700; font-size: 11px; color: var(--primary-600); letter-spacing: 0.06em; }
+  .demo-section h5 { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--neutral-900); margin: 0; flex: 1; border-bottom: 1px solid var(--neutral-200); padding-bottom: 3px; }
+
+  .demo-stamp { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--primary-700); padding: 5px 14px; border: 1.5px solid var(--primary-500); border-radius: 2px; }
+
+  footer.foot { background: var(--neutral-950); color: rgba(255,255,255,0.7); padding: 32px 0; font-size: 13px; }
+  footer.foot .container { display: flex; justify-content: space-between; }
+
+  .note { background: var(--warning-50); border: 1px solid #E6CC9B; border-radius: var(--radius-md); padding: 14px 18px; font-size: 13px; color: var(--warning-700); margin-bottom: 32px; }
+  .note strong { color: var(--warning-700); font-family: var(--font-display); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container row">
+    <a href="../README.md" style="border:0"><img src="../assets/logo-primary.png" alt="Estudio Bacigalupo &amp; Asociados" /></a>
+    <div class="meta">Sistema documental · v1.0 · Mayo 2026</div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="kicker">Sistema documental corporativo</div>
+    <h1>Una identidad técnica única para toda la documentación del Estudio.</h1>
+    <p>Un sistema visual consistente, sobrio y orientado al rubro asegurador. Componentes reutilizables, exportación elegante a PDF, y plantillas listas para usar en cada tipo de informe que emite el Estudio.</p>
+    <div class="toolbar">
+      <div>Tipografía<strong>Montserrat · Source Sans 3</strong></div>
+      <div>Color de marca<strong>#4090C0</strong></div>
+      <div>Formato<strong>A4 · Print-first</strong></div>
+      <div>Tono<strong>Formal · usted · nosotros</strong></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="note">
+      <strong>Cómo usar</strong>
+      Cada plantilla es un archivo HTML autocontenido que enlaza la hoja de estilos común (<code>docs.css</code>). Para exportar a PDF, abra la plantilla y use el botón <em>Imprimir / Guardar PDF</em> de la esquina superior derecha (o <code>Cmd / Ctrl + P</code>). Los datos entre llaves <code>{{ }}</code> indican variables a sustituir por su sistema de gestión.
+    </div>
+
+    <div class="grid">
+
+      <a class="doc-card" href="preinforme.html">
+        <div class="thumb"><iframe src="preinforme.html" loading="lazy"></iframe></div>
+        <div class="meta">
+          <span class="kicker">Provisorio · Estimación inicial</span>
+          <h3>Preinforme de siniestro</h3>
+          <p>Notificación temprana a la aseguradora con la estimación provisoria del monto y el detalle del contrato afectado. Emitido <em>Ad Referéndum</em>.</p>
+          <div class="pages"><span>2 páginas</span><span>Portada + cuerpo</span><span>A4 vertical</span></div>
+        </div>
+      </a>
+
+      <a class="doc-card" href="informe-danos.html">
+        <div class="thumb"><iframe src="informe-danos.html" loading="lazy"></iframe></div>
+        <div class="meta">
+          <span class="kicker">Definitivo · Dictamen completo</span>
+          <h3>Informe de daños</h3>
+          <p>Informe técnico definitivo con resumen ejecutivo, encuadre jurídico, evidencia fotográfica, cuantificación y conclusión del liquidador.</p>
+          <div class="pages"><span>7 páginas</span><span>Evidencia fotográfica</span><span>Conformidades</span><span>Dictamen</span></div>
+        </div>
+      </a>
+
+      <a class="doc-card" href="acta-inspeccion.html">
+        <div class="thumb"><iframe src="acta-inspeccion.html" loading="lazy"></iframe></div>
+        <div class="meta">
+          <span class="kicker">Operativo · Trabajo de campo</span>
+          <h3>Acta de inspección</h3>
+          <p>Registro de relevamiento en campo, con checklist técnico, cuantificación preliminar por unidad y galería fotográfica georreferenciada.</p>
+          <div class="pages"><span>2 páginas</span><span>Checklist técnico</span><span>Galería 3 columnas</span></div>
+        </div>
+      </a>
+
+      <a class="doc-card" href="reporte-ejecutivo.html">
+        <div class="thumb"><iframe src="reporte-ejecutivo.html" loading="lazy"></iframe></div>
+        <div class="meta">
+          <span class="kicker">Gerencial · Cartera por período</span>
+          <h3>Reporte ejecutivo</h3>
+          <p>Síntesis mensual de la cartera asignada para gerencias de siniestros: KPIs, composición de casos, alertas operativas y recomendaciones.</p>
+          <div class="pages"><span>1 página</span><span>Dashboard de KPIs</span><span>Gráficos</span><span>Alertas</span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="components">
+  <div class="container">
+    <h2>Componentes reutilizables</h2>
+    <p>Los mismos primitivos visuales conviven en todas las plantillas. Documentos densos, legibles y de aspecto institucional sin recurrir a ornamento gratuito.</p>
+
+    <div class="comp-grid">
+
+      <div class="item">
+        <h4>Encabezado de sección</h4>
+        <div class="preview">
+          <div class="demo-section">
+            <span class="num">07</span>
+            <h5>Del Reclamo</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Bloque de metadatos</h4>
+        <div class="preview" style="padding: 8px;">
+          <div class="demo-meta" style="width:100%;border:1px solid var(--neutral-200);border-radius:3px;overflow:hidden">
+            <div class="row"><div class="k">Póliza Nº</div><div class="v">FLT-2204-01187</div></div>
+            <div class="row"><div class="k">Siniestro Nº</div><div class="v">27914/2026</div></div>
+            <div class="row"><div class="k">Sección</div><div class="v">Automotores</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Tabla técnica / financiera</h4>
+        <div class="preview" style="padding: 8px;">
+          <table class="demo-table" style="width:100%">
+            <thead><tr><th>Cobertura</th><th>Suma</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>RC terceros</td><td>USD 6.000.000</td><td><span class="chip chip-covered">Operativa</span></td></tr>
+              <tr><td>Casco parcial</td><td>USD 180.000</td><td><span class="chip chip-review">Análisis</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Indicadores de estado</h4>
+        <div class="preview" style="flex-wrap: wrap; gap: 6px;">
+          <span class="chip chip-covered">Cubierto</span>
+          <span class="chip chip-pending">Pendiente</span>
+          <span class="chip chip-excluded">Excluido</span>
+          <span class="chip chip-review">En análisis</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Indicadores de riesgo</h4>
+        <div class="preview" style="flex-direction: column; gap: 8px; align-items: flex-start;">
+          <span class="risk-bar low"><span class="bars"><b></b><b></b><b></b></span>Bajo</span>
+          <span class="risk-bar medium"><span class="bars"><b></b><b></b><b></b></span>Medio</span>
+          <span class="risk-bar high"><span class="bars"><b></b><b></b><b></b></span>Alto</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Sello técnico</h4>
+        <div class="preview">
+          <span class="demo-stamp">Ad Referéndum</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Observación técnica</h4>
+        <div class="preview" style="padding: 10px;">
+          <div class="demo-callout">
+            <div class="label">Nexo causal</div>
+            Acreditado conforme acta policial Nº 1142/26 y prueba pericial complementaria.
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Observación legal</h4>
+        <div class="preview" style="padding: 10px;">
+          <div class="demo-callout" style="border-left-color: var(--neutral-700); background: var(--neutral-50);">
+            <div class="label" style="color: var(--neutral-800)">Encuadre normativo</div>
+            Resoluciones SSN 38.708/2014 y 39.327/2015. Cláusulas Generales verificadas.
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Aviso destacado</h4>
+        <div class="preview" style="padding: 10px;">
+          <div class="demo-banner">
+            <strong>Ad Referéndum</strong>
+            <span>El monto consignado es provisorio hasta liquidación definitiva.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Evidencia fotográfica</h4>
+        <div class="preview" style="padding: 8px;">
+          <div class="demo-evidence">
+            <figure>
+              <div class="frame"><span class="pid">EV-01</span></div>
+              <figcaption>02/03 · 06:42 · GPS</figcaption>
+            </figure>
+            <figure>
+              <div class="frame"><span class="pid">EV-02</span></div>
+              <figcaption>02/03 · 06:48 · GPS</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Conclusión / dictamen</h4>
+        <div class="preview" style="padding: 10px;">
+          <div class="demo-callout" style="border-left-color: var(--primary-700); background: var(--primary-50); border-left-width: 4px;">
+            <div class="label" style="color: var(--primary-700)">Dictamen</div>
+            Aconsejamos proceder a indemnizar el monto resultante de la liquidación.
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h4>Firma del liquidador</h4>
+        <div class="preview" style="padding: 10px;">
+          <div style="text-align:center;font-size: 11px;">
+            <img src="../assets/signature-nbacigalupo.png" alt="" style="height: 36px; filter: grayscale(1) contrast(1.15);" />
+            <div style="font-family: var(--font-display); font-weight: 700; padding-top: 3px; border-top: 1px solid var(--neutral-700); margin-top: 2px;">Nicolás A. Bacigalupo</div>
+            <div style="color: var(--neutral-600); font-size: 9px;">Mat. Nº 284-SSN</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <span>Estudio Bacigalupo &amp; Asociados — Córdoba, Argentina</span>
+    <span>Sistema documental · v1.0 — mayo 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Buttons</title><link rel="stylesheet" href="_card.css">
+<style>
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .col { display:flex; flex-direction:column; gap:12px; padding:6px 0; }
+  .btn {
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 14px; line-height: 1; padding: 11px 18px;
+    border-radius: var(--radius-md); border: 1px solid transparent;
+    cursor: pointer; transition: all 150ms var(--ease-out);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary { background: var(--primary-500); color: #fff; }
+  .btn-primary:hover { background: var(--primary-600); }
+  .btn-secondary { background: #fff; color: var(--fg-1); border-color: var(--border-default); }
+  .btn-secondary:hover { border-color: var(--primary-500); color: var(--primary-700); }
+  .btn-ghost { background: transparent; color: var(--primary-600); }
+  .btn-ghost:hover { background: var(--primary-50); }
+  .btn-danger { background: var(--danger-500); color: #fff; }
+  .btn-sm { padding: 7px 12px; font-size: 13px; }
+  .btn-lg { padding: 14px 22px; font-size: 16px; }
+  .btn[disabled] { opacity: .4; cursor: not-allowed; }
+</style></head>
+<body><div class="card" style="padding:20px 24px;">
+  <div class="col">
+    <div class="row">
+      <button class="btn btn-primary">Solicitar inspección</button>
+      <button class="btn btn-secondary">Ver detalle</button>
+      <button class="btn btn-ghost">Cancelar</button>
+      <button class="btn btn-danger">Cerrar siniestro</button>
+      <button class="btn btn-secondary" disabled>Disabled</button>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary">Default</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+    </div>
+  </div>
+</div></body></html>
